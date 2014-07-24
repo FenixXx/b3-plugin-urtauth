@@ -18,10 +18,11 @@
 #
 # CHANGELOG
 #
-# 24/07/2014 - 1.0 - Fenix - initial release
+# 24/07/2014 - 1.0   - Fenix - initial release
+# 24/07/2014 - 1.0.1 - Fenix - fixed 'maxlevel' config value not being loaded
 
 __author__ = 'Fenix'
-__version__ = '1.0'
+__version__ = '1.0.1'
 
 
 import b3
@@ -68,7 +69,7 @@ class UrtauthPlugin(b3.plugin.Plugin):
         Load plugin configuration.
         """
         try:
-            self.settings['maxlevel'] = self.console.getGroupLevel(self.config.get('settings', 'minlevel'))
+            self.settings['maxlevel'] = self.console.getGroupLevel(self.config.get('settings', 'maxlevel'))
             self.debug('loaded settings/maxlevel: %s' % self.settings['maxlevel'])
         except NoOptionError:
             self.warning('could not find settings/maxlevel in config file, using default: %s' % self.settings['maxlevel'])
