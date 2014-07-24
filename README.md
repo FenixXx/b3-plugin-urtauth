@@ -24,6 +24,7 @@ Installation
   ```xml
   <plugin name="urtauth" config="@b3/extplugins/conf/plugin_urtauth.ini" />
   ```
+  
 Requirements
 ------------
 
