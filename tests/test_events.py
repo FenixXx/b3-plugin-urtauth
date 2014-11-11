@@ -37,6 +37,7 @@ class Test_events(UrtauthTestCase):
         self.mike = FakeClient(console=self.console, name="Mike", guid="mikeguid", groupBits=1)
         self.mark = FakeClient(console=self.console, name="Mark", guid="markguid", groupBits=1, pbid='markguid')
         self.bill = FakeClient(console=self.console, name="Bill", guid="billguid", groupBits=2)
+        self.npc = FakeClient(console=self.console, name="NPC", guid="NPCGUID", groupBits=0, bot=True)
 
 
     def tearDown(self):
@@ -76,5 +77,10 @@ class Test_events(UrtauthTestCase):
         # THEN
         self.assertEqual(0, self.bill.kick.call_count)
 
-
-
+    def test_bot_connect(self):
+        # GIVEN
+        self.npc.kick = Mock()
+        # WHEN
+        self.npc.connects("1")
+        # THEN
+        self.assertEqual(0, self.npc.kick.call_count)

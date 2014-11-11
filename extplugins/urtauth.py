@@ -20,9 +20,10 @@
 #
 # 24/07/2014 - 1.0   - Fenix - initial release
 # 24/07/2014 - 1.0.1 - Fenix - fixed 'maxlevel' config value not being loaded
+# 11/11/2014 - 1.1   - Fenix - don't let the plugin kick bots
 
 __author__ = 'Fenix'
-__version__ = '1.0.1'
+__version__ = '1.1'
 
 
 import b3
@@ -34,7 +35,7 @@ from ConfigParser import NoOptionError
 
 class UrtauthPlugin(b3.plugin.Plugin):
 
-    adminPlugin = None      # admin plugin instance
+    adminPlugin = None
 
     settings = {
         'maxlevel': 2,
@@ -141,6 +142,10 @@ class UrtauthPlugin(b3.plugin.Plugin):
         Check that a client is authed using UrT 4.2 auth system (<pbid> field set).
         :param client: The client on who perform the check.
         """
+        if client.bot:
+            self.debug('skipping auth account check for %s<@%s> : BOT detected' % (client.name, client.id))
+            return
+
         if not self.console.is_frozensand_auth_available():
             self.debug('skipping auth account check for %s<@%s> : auth system not available' % (client.name, client.id))
             return
