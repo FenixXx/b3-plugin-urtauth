@@ -18,8 +18,6 @@
 
 from mock import Mock
 from mock import call
-from textwrap import dedent
-from mockito import when
 from tests import logging_disabled
 from tests import UrtauthTestCase
 
